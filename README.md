@@ -113,5 +113,9 @@ Para tanto, você deve também alterar `LaserShot.java` para usar esse novo
 método de detecção de colisão. Use a funcionalidade de _debug_ do jogo
 para verificar se está funcionando.
 
+### Defafio 2
+
+Implemente a colisão entre polígonos e convexos (como Asteriod e Laser Shot). Usar a implementação do SAT da classe Intersector da LibGDX.
+
 [vector2]: https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html
 [shape]: https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/glutils/ShapeRenderer.html
