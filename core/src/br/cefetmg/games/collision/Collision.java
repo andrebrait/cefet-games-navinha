@@ -24,7 +24,7 @@ public class Collision {
 	 *            O comprimento da segunda linha.
 	 * @return true se as duas linhas se interceptam.
 	 */
-	public static final boolean lineOverlap(float begin1, float len1, float begin2, float len2) {
+	public static final boolean linesOverlap(float begin1, float len1, float begin2, float len2) {
 		return begin1 < begin2 + len2 && begin1 + len1 > begin2;
 	}
 
@@ -58,6 +58,6 @@ public class Collision {
 	 * @return true se há colisão ou false, do contrário.
 	 */
 	public static final boolean rectsOverlap(Rectangle r1, Rectangle r2) {
-		return lineOverlap(r1.x, r1.width, r2.x, r2.width) && lineOverlap(r1.y, r1.height, r2.y, r2.height);
+		return linesOverlap(r1.x, r1.width, r2.x, r2.width) && linesOverlap(r1.y, r1.height, r2.y, r2.height);
 	}
 }
