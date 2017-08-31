@@ -115,7 +115,9 @@ para verificar se está funcionando.
 
 ### Defafio 2
 
-Implemente a colisão entre polígonos e convexos (como Asteriod e Laser Shot). Usar a implementação do SAT da classe Intersector da LibGDX.
+Implemente a colisão entre polígonos e convexos (como `Asteriod.java` e `LaserShot.java`). 
+Usar a implementação do SAT da classe Intersector da LibGDX. Encontrar a 
+convex hull dos vértices dos asteróides. Procure pela classe `ConvexHull` da LibGDX.
 
 [vector2]: https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html
 [shape]: https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/glutils/ShapeRenderer.html
