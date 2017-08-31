@@ -12,67 +12,67 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Tiro laser.
+ * 
  * @author fegemo <coutinho@decom.cefetmg.br>
  */
 public class LaserShot implements Shot {
 
-    private static final float WIDTH = 4;
-    private static final float HEIGHT = 14;
-    private final Vector2 position;
-    private final float speed;
-    private final Rectangle bounds;
+	private static final float WIDTH = 4;
+	private static final float HEIGHT = 14;
+	private final Vector2 position;
+	private final float speed;
+	private final Rectangle bounds;
 
-    LaserShot(Vector2 position) {
-        this.position = new Vector2(position);
-        bounds = new Rectangle(
-                position.x - WIDTH / 2f, position.y - HEIGHT / 2f,
-                WIDTH, HEIGHT);
-        speed = 100;
-    }
+	LaserShot(Vector2 position) {
+		this.position = new Vector2(position);
+		bounds = new Rectangle(position.x - WIDTH / 2f, position.y - HEIGHT / 2f, WIDTH, HEIGHT);
+		speed = 100;
+	}
 
-    @Override
-    public void update(float dt) {
-        position.y += speed * dt;
-        bounds.y = position.y - HEIGHT / 2F;
-    }
+	@Override
+	public void update(float dt) {
+		position.y += speed * dt;
+		bounds.y = position.y - HEIGHT / 2F;
+	}
 
-    @Override
-    public void render(ShapeRenderer renderer) {
-        renderer.setColor(Color.PINK);
-        renderer.identity();
-        renderer.translate(position.x, position.y, 0);
-        renderer.rect(-WIDTH / 2F, -HEIGHT / 2F, WIDTH, HEIGHT);
-        if (Config.debug) {
-            renderer.setColor(Color.YELLOW);
-            renderer.identity();
-            renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
-        }
-    }
+	@Override
+	public void render(ShapeRenderer renderer) {
+		renderer.setColor(Color.PINK);
+		renderer.identity();
+		renderer.translate(position.x, position.y, 0);
+		renderer.rect(-WIDTH / 2F, -HEIGHT / 2F, WIDTH, HEIGHT);
+		if (Config.debug) {
+			renderer.setColor(Color.YELLOW);
+			renderer.identity();
+			renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+		}
+	}
 
-    @Override
-    public boolean isOutOfBounds(Rectangle area) {
-        return !area.overlaps(bounds);
-    }
+	@Override
+	public boolean isOutOfBounds(Rectangle area) {
+		return !area.overlaps(bounds);
+	}
 
-    @Override
-    public boolean collidesWith(Collidable other) {
-        // Laser vs Asteroid: rect vs rect
-        // Laser vs Vortex: rect vs rect
-        // Laser vs Ship: nada
-        if (other instanceof Asteroid || other instanceof VortexShot) {
-            return Collision.rectsOverlap(bounds, other.getMinimumBoundingRectangle());
-        } else {
-            return false;
-        }
-    }
-    
-    @Override
-    public Rectangle getMinimumBoundingRectangle() {
-        return bounds;
-    }
+	@Override
+	public boolean collidesWith(Collidable other) {
+		// Laser vs Asteroid: rect vs rect && rect vs circle
+		// Laser vs Vortex: rect vs rect
+		// Laser vs Ship: nada
+		if (other instanceof Asteroid || other instanceof VortexShot) {
+			return Collision.rectsOverlap(bounds, other.getMinimumBoundingRectangle())
+					&& Collision.circleRectOverlap(other.getMinimumEnclosingBall(), bounds);
+		} else {
+			return false;
+		}
+	}
 
-    @Override
-    public Circle getMinimumEnclosingBall() {
-        return null;
-    }
+	@Override
+	public Rectangle getMinimumBoundingRectangle() {
+		return bounds;
+	}
+
+	@Override
+	public Circle getMinimumEnclosingBall() {
+		return null;
+	}
 }

@@ -22,7 +22,7 @@ public class Collision {
 	 *            A coordenada de início da segunda linha.
 	 * @param len2
 	 *            O comprimento da segunda linha.
-	 * @return true se as duas linhas se interceptam.
+	 * @return true se as duas linhas se interceptam ou false, do contrário.
 	 */
 	public static final boolean linesOverlap(float begin1, float len1, float begin2, float len2) {
 		return begin1 < begin2 + len2 && begin1 + len1 > begin2;
@@ -59,5 +59,37 @@ public class Collision {
 	 */
 	public static final boolean rectsOverlap(Rectangle r1, Rectangle r2) {
 		return linesOverlap(r1.x, r1.width, r2.x, r2.width) && linesOverlap(r1.y, r1.height, r2.y, r2.height);
+	}
+
+	/**
+	 * Verifica se um círculo e um retângulo estão colidindo.
+	 * 
+	 * @param c
+	 *            O círculo a avaliar.
+	 * @param r
+	 *            O retângulo a avaliar.
+	 * 
+	 * @return true se há colisão ou false, do contrário.
+	 */
+	public static final boolean circleRectOverlap(Circle c, Rectangle r) {
+		float closestX = clamp(c.x, r.x, r.x + r.width);
+		float closestY = clamp(c.y, r.y, r.y + r.height);
+		return Vector2.dst2(closestX, closestY, c.x, c.y) < c.radius * c.radius;
+	}
+
+	/**
+	 * Realiza operação de Clamping, restringindo o valor de X ao range [lowerLimit,
+	 * upperLimit].
+	 * 
+	 * @param x
+	 *            Valor a sofrer clamping.
+	 * @param lowerLimit
+	 *            Limite inferior.
+	 * @param upperLimit
+	 *            Limite superior.
+	 * @return O valor de X restrito ao range fornecido.
+	 */
+	private static final float clamp(float x, float lowerLimit, float upperLimit) {
+		return Math.min(Math.max(x, lowerLimit), upperLimit);
 	}
 }

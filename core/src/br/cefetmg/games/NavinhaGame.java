@@ -1,6 +1,5 @@
 package br.cefetmg.games;
 
-import br.cefetmg.games.collision.Collidable;
 import br.cefetmg.games.weapons.Shot;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
