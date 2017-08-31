@@ -12,6 +12,23 @@ import com.badlogic.gdx.math.Vector2;
 public class Collision {
 
 	/**
+	 * Verifica se duas linhas se interceptam (considerando apenas uma dimensão).
+	 * 
+	 * @param begin1
+	 *            A coordenada de início da primeira linha.
+	 * @param len1
+	 *            O comprimento da primeira linha.
+	 * @param begin2
+	 *            A coordenada de início da segunda linha.
+	 * @param len2
+	 *            O comprimento da segunda linha.
+	 * @return true se as duas linhas se interceptam.
+	 */
+	public static final boolean lineOverlap(float begin1, float len1, float begin2, float len2) {
+		return begin1 < begin2 + len2 && begin1 + len1 > begin2;
+	}
+
+	/**
 	 * Verifica se dois círculos em 2D estão colidindo.
 	 * 
 	 * @param c1
@@ -41,6 +58,6 @@ public class Collision {
 	 * @return true se há colisão ou false, do contrário.
 	 */
 	public static final boolean rectsOverlap(Rectangle r1, Rectangle r2) {
-		return false;
+		return lineOverlap(r1.x, r1.width, r2.x, r2.width) && lineOverlap(r1.y, r1.height, r2.y, r2.height);
 	}
 }
